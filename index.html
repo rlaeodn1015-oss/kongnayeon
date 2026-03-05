@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
-    <title>스승님 | 3월 한정 특별 1박2일 제주 캠프</title>
+    <title>스승님 | 3월 한정 VVIP 1박2일 제주 캠프</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -137,7 +137,7 @@
         return (
           <div className="bg-red-50 border border-red-100 p-4 rounded-2xl mb-8 text-center">
             <p className="text-red-600 font-black text-sm md:text-lg tracking-tight">🚨 마감 임박! 혜택 종료까지 <span className="tabular-nums font-mono">{min}:{sec.toString().padStart(2, "0")}</span></p>
-            <p className="text-red-400 text-[10px] md:text-xs font-bold mt-1 tracking-tight">지금 신청서를 작성하셔야 우선 순위 배정이 가능합니다.</p>
+            <p className="text-red-400 text-[10px] md:text-xs font-bold mt-1 tracking-tight">지금 신청서를 작성하시면 우선 순위 배정 됩니다.</p>
           </div>
         );
       };
@@ -171,9 +171,9 @@
           <div className="max-w-6xl mx-auto">
             <div className="flex justify-center gap-2 mb-4 flex-wrap">
               <div className="pill">2026 스승님 시즌 첫 제주 캠프 🌿</div>
-              <div className="pill" style={{ background: "#fff", border: "1px solid var(--primary)" }}>제주 아덴힐CC 프라이빗</div>
+              <div className="pill" style={{ background: "#fff", border: "1px solid var(--primary)" }}>제주 아덴힐CC VVIP CAMP</div>
             </div>
-            <h1 className="h1">연습장 싱글이신가요?<br/>필드에선 <span>백돌이</span>인 당신을 위해</h1>
+            <h1 className="h1">연습장,스크린 싱글이신가요?<br/>필드 <span>백돌이</span>인 당신을 위해</h1>
             <p className="text-lg md:text-xl text-slate-500 font-bold mb-8">서수연 스승님의 36H 밀착 제주 필드 레슨</p>
             <a href="#apply" className="btn">제주캠프 우선권 확보 ✨</a>
           </div>
@@ -186,7 +186,7 @@
             {[
               {l: "3/25 잔여", v: "단 1자리", c: "text-red-500"},
               {l: "3/28 주말", v: "2인 가능", c: "text-slate-900"},
-              {l: "스승님 혜택", v: "30만원 상당", c: "text-emerald-600"},
+              {l: "스승님 혜택", v: "30만원 상당 할인", c: "text-emerald-600"},
               {l: "단독 증정", v: "롱티/앱 포인트", c: "text-slate-900"}
             ].map(s => (
               <div key={s.l}>
@@ -203,13 +203,13 @@
           <h2 className="h2 italic uppercase">SSNIM <span>Benefit</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
             <div className="card border-2 border-emerald-600/20 relative overflow-hidden">
-              <div className="absolute top-0 right-0 bg-red-500 text-white px-3 py-1 text-[10px] font-black uppercase rounded-bl-lg">단독 혜택</div>
+              <div className="absolute top-0 right-0 bg-red-500 text-white px-3 py-1 text-[10px] font-black uppercase rounded-bl-lg">스승님 단독 혜택</div>
               <h3 className="text-xl font-black mb-6 tracking-tighter">캠프 참가 비용</h3>
               <div className="space-y-2">
                 <div className="text-slate-400 font-bold line-through text-lg italic">기존가 1,700,000원</div>
                 <div className="text-4xl md:text-5xl font-black text-emerald-700 tracking-tighter leading-none">1,500,000원 <span className="text-base font-bold text-emerald-600">(-20만 원)</span></div>
               </div>
-              <p className="mt-6 text-xs text-slate-400 font-bold">* 1박 2일 레슨비, 40평대 숙박, 조식 포함 (항공/그린피/캐디피 별도)</p>
+              <p className="mt-6 text-xs text-slate-400 font-bold">* 1박 2일 레슨비, 그린피+카트비 40평대 숙박, 조식, 송영차량 포함 (항공/캐디피 별도)</p>
             </div>
             <div className="card bg-emerald-900 text-white border-0">
               <h3 className="text-xl font-black mb-6 text-emerald-400 italic tracking-tighter">+ SPECIAL GIFT</h3>
@@ -225,7 +225,7 @@
                   <div className="bg-emerald-700 p-1.5 rounded-full text-white text-[10px] shrink-0">✔</div>
                   <div>
                     <div className="font-black text-lg tracking-tight">스승님 시그니처 롱티 세트</div>
-                    <p className="text-emerald-300/70 text-sm">필드 최고의 퍼포먼스를 위한 전용 굿즈</p>
+                    <p className="text-emerald-300/70 text-sm">필드 최고의 퍼포먼스를 위한 전용 롱티</p>
                   </div>
                 </li>
               </ul>
@@ -245,12 +245,12 @@
               <h2 className="text-3xl font-black mt-2 mb-4">서수연 스승님</h2>
               <p className="font-extrabold text-lg text-emerald-700 mb-6 leading-relaxed italic">"당신의 스윙으로 최고의 스코어를<br/>만들어내는 진짜 공략법을 전수합니다."</p>
               <ul className="space-y-2 text-sm font-bold text-slate-500 mb-8">
-                <li>• 필드 코스 매니지먼트 및 실전 전략 전문가</li>
-                <li>• 강남 프리미엄 프라이빗 레슨 스튜디오 운영</li>
-                <li>• 10년 이상의 필드 레슨 교정 노하우</li>
+                <li>• 선수 경험 필드 코스 매니지먼트 및 실전 전략 전문가</li>
+                <li>• 강남 프라이빗 레슨 스튜디오 누적 회원 1,000+</li>
+                <li>• 10년 이상의 필드 레슨 교정 및 스코어 변화 노하우</li>
               </ul>
               <div className="flex gap-3 flex-wrap justify-center md:justify-start">
-                <a href="https://www.instagram.com/s.o_o.yeon/" target="_blank" className="btn btn-outline py-3 px-6 text-sm">인스타그램 ↗</a>
+                <a href="https://www.instagram.com/s.o_o.yeon/" target="_blank" className="btn btn-outline py-3 px-6 text-sm">서수연스승 인스타그램 ↗</a>
                 <a href="http://pf.kakao.com/_kxawRn/chat" target="_blank" className="btn py-3 px-6 text-sm">스승님 카톡문의</a>
               </div>
             </div>
@@ -263,9 +263,9 @@
           <h2 className="h2 center">캠프 하루 <span>일정</span></h2>
           <div className="max-w-2xl mx-auto space-y-4 mt-10">
             {[
-              {t: "AM", title: "첫 티샷의 문제점 해소", d: "프로님이 옆에서 에이밍과 루틴을 직접 교정해 드립니다."},
+              {t: "AM", title: "첫 티샷의 문제,스윙 분석", d: "프로님이 옆에서 에이밍과 고민,스윙을 직접 교정해 드립니다."},
               {t: "PM", title: "상황별 세컨샷 정복", d: "라이와 바람을 고려한 영리한 클럽 선택법을 현장에서 배웁니다."},
-              {t: "EVE", title: "영상 분석 & 스코어 전략", d: "당일 라운드를 복기하며 내일의 전략을 함께 세웁니다."}
+              {t: "EVE", title: "라운드 분석 & 스코어 전략", d: "당일 라운드를 복기하며 내일의 전략을 함께 세웁니다."}
             ].map((item, idx) => (
               <div key={idx} className="card flex items-center gap-6 p-6">
                 <div className="text-2xl font-black text-emerald-600 border-r border-slate-100 pr-6 shrink-0">{item.t}</div>
@@ -288,7 +288,7 @@
               <div className="mt-4 font-black not-italic text-emerald-600 text-sm">- 회원 김OO님</div>
             </div>
             <div className="card text-base leading-relaxed italic border-l-4 border-emerald-600">
-              "제주도 바람 때문에 늘 힘들었는데, 이번 캠프에서 클럽 선택과 바람 읽는 법을 제대로 배웠습니다."
+              "스코어가 줄지 않아 힘들었는데, 이번 캠프에서 클럽 선택과 스코어 방어하는 방법을 제대로 배우고 평균 8타 줄였습니다."
               <div className="mt-4 font-black not-italic text-emerald-600 text-sm">- 회원 이OO님</div>
             </div>
           </div>
@@ -298,10 +298,10 @@
       const FAQ = () => {
         const [activeIdx, setActiveIdx] = useState(0);
         const faqs = [
-          { q: "백돌이도 참여 가능한가요?", a: "네, 실력별 맞춤 레슨이 진행되므로 초보자부터 싱글 지향 골퍼까지 모두 참여 가능합니다." },
-          { q: "준비물은 무엇인가요?", a: "개인 클럽과 골프복만 준비해 주세요. 숙박과 모든 식사는 포함되어 있습니다." },
-          { q: "1인 신청도 가능한가요?", a: "물론입니다. 혼자 오시는 분들도 많으시며 프로님과 매니저가 즐겁게 동행합니다." },
-          { q: "항공권과 그린피는 별도인가요?", a: "네, 항공권과 현장 그린피(카트/캐디 포함)는 개별 부담입니다." }
+          { q: "백돌이도 참여 가능한가요?", a: "네, 실력별 맞춤 레슨이 진행되므로 초보자부터 싱글 골퍼까지 모두 참여 가능합니다." },
+          { q: "준비물은 무엇인가요?", a: "개인 클럽과 골프복, 제주도 여행처럼 준비해 주세요. 숙박과 조식은 포함되어 있습니다." },
+          { q: "1인 신청도 가능한가요?", a: "물론입니다. 혼자 오시는 분들도 많으시며 프로님과 동반자가 즐겁게 동행합니다." },
+          { q: "항공권과 캐디피는 별도인가요?", a: "네, 항공권과 캐디피는 개별 부담입니다. 나머지는 모두 포함되어 있습니다" }
         ];
         return (
           <Section className="bg-white" id="faq">
@@ -335,7 +335,7 @@
               <h3 className="text-2xl font-black mb-8 text-center mt-4 tracking-tighter">제주 캠프 상담 신청</h3>
               <FormTimer />
               {status === "SUCCESS" ? (
-                <div className="text-center py-10 font-black">상담 예약 접수 완료! 곧 연락드리겠습니다.</div>
+                <div className="text-center py-10 font-black">상담 예약 접수 완료! 스승님 담당자가 곧 연락드리겠습니다.</div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <select className="input font-bold" name="일정">
@@ -347,7 +347,7 @@
                   <input required name="연락처" type="tel" placeholder="연락처 (010-0000-0000)" className="input" />
                   <textarea name="고민" className="input h-32" placeholder="해결하고 싶은 고민을 구체적으로 적어주세요."></textarea>
                   <button disabled={status==="SUBMITTING"} className="btn w-full mt-4 font-black bg-slate-900 text-lg shadow-xl active:scale-95 transition-transform">
-                    {status === "SUBMITTING" ? "전송 중..." : "캠프 자리 확보하기 ✨"}
+                    {status === "SUBMITTING" ? "전송 중..." : "캠프 자리 확보 하기 ✨"}
                   </button>
                 </form>
               )}
@@ -400,4 +400,5 @@
     </script>
   </body>
 </html>
+
 
