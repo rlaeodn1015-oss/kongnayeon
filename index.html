@@ -1,5 +1,181 @@
- 우선권 확보✨</a>
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <title>스승님 | 3월 한정 특별 1박2일 제주 캠프</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+      :root {
+        --primary: #556b2f; 
+        --primary-light: #f1f5e9;
+        --secondary: #d4a373;
+        --bg: #fdfdfb;
+        --text: #2d2a26;
+        --muted: #79716b;
+        --white: #ffffff;
+        --radius-lg: 40px;
+        --radius-md: 24px;
+        --shadow: 0 15px 40px rgba(85, 107, 47, 0.08);
+        --max: 1000px;
+      }
+      * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.8;
+        word-break: keep-all;
+      }
+      
+      #viewerCount {
+        position: fixed; top: 76px; right: 16px; z-index: 40; 
+        background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+        padding: 8px 14px; border-radius: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        font-weight: 800; font-size: 11px; color: var(--primary);
+        border: 1px solid var(--primary-light); display: flex; align-items: center; gap: 6px;
+        white-space: nowrap; transition: all 0.3s ease;
+      }
+      #viewerCount::before {
+        content: ""; width: 7px; height: 7px; background: #22c55e;
+        border-radius: 50%; display: inline-block; animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+      }
+
+      #liveNotice {
+        position: fixed; bottom: 85px; left: 12px; right: 12px;
+        z-index: 9999; display: none; background: var(--white); padding: 14px 20px; border-radius: 18px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.18); font-weight: 700; font-size: 14px; color: var(--text);
+        border: 1px solid var(--primary-light); animation: slideUp 0.5s ease-out; max-width: 420px; margin: 0 auto;
+      }
+      @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+      @media (min-width: 768px) {
+        #viewerCount { top: 25px; right: 25px; font-size: 14px; padding: 12px 20px; z-index: 10001; }
+        #liveNotice { bottom: 35px; left: 35px; right: auto; margin: 0; padding: 18px 24px; font-size: 15px; }
+      }
+      
+      .section { padding: 80px 0; position: relative; }
+      .section-alt { 
+        background: radial-gradient(circle at 10% 10%, rgba(85,107,47,0.05), transparent 40%),
+                    radial-gradient(circle at 90% 90%, rgba(212,163,115,0.05), transparent 40%);
+        border-radius: 60px;
+      }
+      .h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; line-height: 1.3; margin-bottom: 30px; letter-spacing: -0.04em; text-align: center; }
+      .h2 span { color: var(--primary); }
+      .pill { display: inline-block; padding: 6px 18px; background: var(--primary-light); color: var(--primary); font-weight: 900; font-size: 12px; border-radius: 999px; margin-bottom: 12px; }
+      .card { background: var(--white); padding: 30px; border-radius: var(--radius-md); box-shadow: var(--shadow); border: 1px solid rgba(0,0,0,0.03); transition: transform 0.3s; }
+      .card:hover { transform: translateY(-10px); }
+      .h1 { font-size: clamp(34px, 5vw, 56px); font-weight: 900; line-height: 1.2; margin-bottom: 24px; }
+      .h1 span { color: var(--primary); }
+      .btn { display: inline-flex; align-items: center; justify-content: center; background: var(--primary); color: #fff; font-weight: 800; border: 0; padding: 18px 36px; border-radius: 999px; transition: all 0.4s; cursor: pointer; font-size: 17px; text-decoration: none; }
+      .btn-outline { background: #fff; color: var(--primary); border: 2px solid var(--primary); }
+      .apply-wrap { max-width: 650px; margin: 40px auto 100px; background: #fff; padding: 40px 20px; border-radius: var(--radius-md); box-shadow: 0 40px 80px rgba(0,0,0,0.1); position: relative; z-index: 10; border: 2px solid var(--primary); }
+      @media (min-width: 768px) { .apply-wrap { padding: 50px; } }
+      .input { width: 100%; padding: 18px; border-radius: 20px; border: 1px solid #eee; background: #fcfcfc; font-size: 16px; margin-bottom: 20px; font-family: inherit; }
+      
+      .faq-item { border-bottom: 1px solid #f1f1f1; }
+      .faq-question { padding: 24px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 17px; }
+      .faq-answer { max-height: 0; overflow: hidden; transition: all 0.4s ease-out; color: var(--muted); font-size: 15px; }
+      .faq-item.active .faq-answer { max-height: 300px; padding-bottom: 24px; }
+      .faq-item.active .faq-icon { transform: rotate(180deg); }
+      .faq-icon { transition: transform 0.4s; color: var(--primary); }
+
+      @media (max-width: 860px) {
+        .h1 { font-size: 32px; }
+        .section { padding: 60px 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viewerCount">현재 <span id="count">25</span>명이 캠프를 보고 있습니다</div>
+    <div id="liveNotice"><span id="noticeText"></span></div>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useEffect, useRef, useState } = React;
+      const scrollToId = (id) => {
+        const el = document.getElementById(id);
+        if (el) window.scrollTo({ top: el.offsetTop - 70, behavior: "smooth" });
+      };
+
+      const Section = ({ id, className = "", children }) => {
+        const ref = useRef(null);
+        const [isVisible, setIsVisible] = useState(false);
+        useEffect(() => {
+          const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) { setIsVisible(true); observer.unobserve(entry.target); }
+          }, { threshold: 0.05 });
+          if (ref.current) observer.observe(ref.current);
+          return () => observer.disconnect();
+        }, []);
+        return (
+          <section id={id} ref={ref} className={`section px-5 ${className} transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+            <div className="max-w-6xl mx-auto">{children}</div>
+          </section>
+        );
+      };
+
+      const FormTimer = () => {
+        const [seconds, setSeconds] = useState(900);
+        useEffect(() => {
+          if (seconds <= 0) return;
+          const t = setInterval(() => setSeconds(s => s - 1), 1000);
+          return () => clearInterval(t);
+        }, [seconds]);
+        const min = Math.floor(seconds / 60);
+        const sec = seconds % 60;
+        return (
+          <div className="bg-red-50 border border-red-100 p-4 rounded-2xl mb-8 text-center">
+            <p className="text-red-600 font-black text-sm md:text-lg tracking-tight">🚨 마감 임박! 혜택 종료까지 <span className="tabular-nums font-mono">{min}:{sec.toString().padStart(2, "0")}</span></p>
+            <p className="text-red-400 text-[10px] md:text-xs font-bold mt-1 tracking-tight">지금 신청서를 작성하셔야 우선 순위 배정이 가능합니다.</p>
+          </div>
+        );
+      };
+
+      const Header = () => {
+        const [timeLeft, setTimeLeft] = useState({ h: 0, m: 0, s: 0 });
+        useEffect(() => {
+          const target = new Date(); target.setHours(23, 59, 59);
+          const timer = setInterval(() => {
+            const now = new Date(); const diff = target - now;
+            if (diff <= 0) target.setDate(target.getDate() + 1);
+            else setTimeLeft({ h: Math.floor((diff / (1000 * 60 * 60)) % 24), m: Math.floor((diff / 1000 / 60) % 60), s: Math.floor((diff / 1000) % 60) });
+          }, 1000);
+          return () => clearInterval(timer);
+        }, []);
+        return (
+          <nav className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
+            <div className="max-w-6xl mx-auto px-5 py-3.5 flex justify-between items-center">
+              <div className="text-xl font-[900] tracking-tighter text-emerald-600" onClick={() => window.scrollTo({top:0, behavior:"smooth"})}>스승님<span className="text-slate-300 font-normal ml-0.5 text-sm italic uppercase">SSNIM</span></div>
+              <div className="bg-slate-900 text-white px-3 py-1.5 rounded-lg text-[10px] md:text-xs font-black flex items-center gap-1.5 tabular-nums">
+                <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span>
+                상담 마감 {timeLeft.h.toString().padStart(2, "0")}:{timeLeft.m.toString().padStart(2, "0")}:{timeLeft.s.toString().padStart(2, "0")}
+              </div>
             </div>
+          </nav>
+        );
+      };
+
+      const Hero = () => (
+        <section className="pt-28 md:pt-44 pb-12 px-5 bg-white text-center">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex justify-center gap-2 mb-4 flex-wrap">
+              <div className="pill">2026 스승님 시즌 첫 제주 캠프 🌿</div>
+              <div className="pill" style={{ background: "#fff", border: "1px solid var(--primary)" }}>제주 아덴힐CC 프라이빗</div>
+            </div>
+            <h1 className="h1">연습장 싱글이신가요?<br/>필드에선 <span>백돌이</span>인 당신을 위해</h1>
+            <p className="text-lg md:text-xl text-slate-500 font-bold mb-8">서수연 스승님의 36H 밀착 제주 필드 레슨</p>
+            <a href="#apply" className="btn">제주캠프 우선권 확보 ✨</a>
           </div>
         </section>
       );
@@ -12,10 +188,10 @@
               {l: "3/28 주말", v: "2인 가능", c: "text-slate-900"},
               {l: "스승님 혜택", v: "30만원 상당", c: "text-emerald-600"},
               {l: "단독 증정", v: "롱티/앱 포인트", c: "text-slate-900"}
-            ].map(item => (
-              <div key={item.l}>
-                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{item.l}</div>
-                <div className={`text-xl md:text-3xl font-[900] ${item.c}`}>{item.v}</div>
+            ].map(s => (
+              <div key={s.l}>
+                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{s.l}</div>
+                <div className={`text-xl md:text-3xl font-[900] ${s.c}`}>{s.v}</div>
               </div>
             ))}
           </div>
@@ -24,7 +200,7 @@
 
       const PriceBenefit = () => (
         <Section className="bg-[#fcfcf9]">
-          <h2 className="h2 italic uppercase text-center">SSNIM <span>Benefit</span></h2>
+          <h2 className="h2 italic uppercase">SSNIM <span>Benefit</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
             <div className="card border-2 border-emerald-600/20 relative overflow-hidden">
               <div className="absolute top-0 right-0 bg-red-500 text-white px-3 py-1 text-[10px] font-black uppercase rounded-bl-lg">단독 혜택</div>
@@ -33,7 +209,7 @@
                 <div className="text-slate-400 font-bold line-through text-lg italic">기존가 1,700,000원</div>
                 <div className="text-4xl md:text-5xl font-black text-emerald-700 tracking-tighter leading-none">1,500,000원 <span className="text-base font-bold text-emerald-600">(-20만 원)</span></div>
               </div>
-              <p className="mt-6 text-xs text-slate-400 font-bold">* 1박 2일 레슨비, 40평대 숙박, 조식 포함 (항공/캐디피 별도)</p>
+              <p className="mt-6 text-xs text-slate-400 font-bold">* 1박 2일 레슨비, 40평대 숙박, 조식 포함 (항공/그린피/캐디피 별도)</p>
             </div>
             <div className="card bg-emerald-900 text-white border-0">
               <h3 className="text-xl font-black mb-6 text-emerald-400 italic tracking-tighter">+ SPECIAL GIFT</h3>
@@ -42,14 +218,14 @@
                   <div className="bg-emerald-700 p-1.5 rounded-full text-white text-[10px] shrink-0">✔</div>
                   <div>
                     <div className="font-black text-lg tracking-tight">스승님 앱 50,000 포인트 지급</div>
-                    <p className="text-emerald-300/70 text-sm">캠프 후 앱 내 레슨권 결제 활용</p>
+                    <p className="text-emerald-300/70 text-sm">캠프 후 앱 내 레슨 결제 활용 가능</p>
                   </div>
                 </li>
                 <li className="flex gap-4">
                   <div className="bg-emerald-700 p-1.5 rounded-full text-white text-[10px] shrink-0">✔</div>
                   <div>
                     <div className="font-black text-lg tracking-tight">스승님 시그니처 롱티 세트</div>
-                    <p className="text-emerald-300/70 text-sm">필드 최고의 퍼포먼스를 위한 전용 롱티</p>
+                    <p className="text-emerald-300/70 text-sm">필드 최고의 퍼포먼스를 위한 전용 굿즈</p>
                   </div>
                 </li>
               </ul>
@@ -67,15 +243,15 @@
             <div className="text-center md:text-left flex-1">
               <span className="pill">KLPGA CLASS A</span>
               <h2 className="text-3xl font-black mt-2 mb-4">서수연 스승님</h2>
-              <p className="font-extrabold text-lg text-emerald-700 mb-6 leading-relaxed italic">"당신의 스윙으로 최고의 스코어를<br/>만들어내는 진짜 공략법을 알려드립니다."</p>
+              <p className="font-extrabold text-lg text-emerald-700 mb-6 leading-relaxed italic">"당신의 스윙으로 최고의 스코어를<br/>만들어내는 진짜 공략법을 전수합니다."</p>
               <ul className="space-y-2 text-sm font-bold text-slate-500 mb-8">
-                <li>• 선수 경험 필드 코스 매니지먼트 및 실전 전략 전문가</li>
-                <li>• 강남 프리미엄 프라이빗 레슨 누적 회원 1,000+</li>
-                <li>• 현장 기반 필드 레슨 스코어 줄이는 10년 노하우</li>
+                <li>• 필드 코스 매니지먼트 및 실전 전략 전문가</li>
+                <li>• 강남 프리미엄 프라이빗 레슨 스튜디오 운영</li>
+                <li>• 10년 이상의 필드 레슨 교정 노하우</li>
               </ul>
-              <div className="flex gap-3 flex-wrap justify-center md:justify-start mt-6">
-                <a href="https://www.instagram.com/s.o_o.yeon/" target="_blank" className="btn btn-outline py-3 px-6 text-sm">서수연스승 인스타그램 ↗</a>
-                <a href="http://pf.kakao.com/_kxawRn/chat" target="_blank" className="btn py-3 px-6 text-sm">스승님 문의 (공식채널)</a>
+              <div className="flex gap-3 flex-wrap justify-center md:justify-start">
+                <a href="https://www.instagram.com/s.o_o.yeon/" target="_blank" className="btn btn-outline py-3 px-6 text-sm">인스타그램 ↗</a>
+                <a href="http://pf.kakao.com/_kxawRn/chat" target="_blank" className="btn py-3 px-6 text-sm">스승님 카톡문의</a>
               </div>
             </div>
           </div>
@@ -87,9 +263,9 @@
           <h2 className="h2 center">캠프 하루 <span>일정</span></h2>
           <div className="max-w-2xl mx-auto space-y-4 mt-10">
             {[
-              {t: "AM", title: "드라이버의 스윙&문제점", d: "프로님이 옆에서 에이밍과 스윙,고민을 잡아드립니다."},
-              {t: "PM", title: "상황별 클럽,세컨샷 정복", d: "라이와 바람을 고려한 영리한 클럽 선택법을 배웁니다."},
-              {t: "EVE", title: "필드 분석 & 스코어 전략 수립", d: "당일 라운드를 복기하며 내일의 스코어를 설계합니다."}
+              {t: "AM", title: "첫 티샷의 문제점 해소", d: "프로님이 옆에서 에이밍과 루틴을 직접 교정해 드립니다."},
+              {t: "PM", title: "상황별 세컨샷 정복", d: "라이와 바람을 고려한 영리한 클럽 선택법을 현장에서 배웁니다."},
+              {t: "EVE", title: "영상 분석 & 스코어 전략", d: "당일 라운드를 복기하며 내일의 전략을 함께 세웁니다."}
             ].map((item, idx) => (
               <div key={idx} className="card flex items-center gap-6 p-6">
                 <div className="text-2xl font-black text-emerald-600 border-r border-slate-100 pr-6 shrink-0">{item.t}</div>
@@ -105,14 +281,14 @@
 
       const Reviews = () => (
         <Section id="reviews">
-          <h2 className="h2 center">회원들의 <span>리얼 후기</span></h2>
+          <h2 className="h2 center">회원들의 <span>리얼 증언</span></h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
             <div className="card text-base leading-relaxed italic border-l-4 border-emerald-600">
               "프로님이 밀착 레슨을 해주시니 비용이 하나도 아깝지 않았습니다. 덕분에 백돌이 드디어 탈출했습니다!"
               <div className="mt-4 font-black not-italic text-emerald-600 text-sm">- 회원 김OO님</div>
             </div>
             <div className="card text-base leading-relaxed italic border-l-4 border-emerald-600">
-              "바람 읽는 법과 클럽 선택을 이번 제주 캠프에서 제대로 배웠습니다. 인생 라운딩이었어요!"
+              "제주도 바람 때문에 늘 힘들었는데, 이번 캠프에서 클럽 선택과 바람 읽는 법을 제대로 배웠습니다."
               <div className="mt-4 font-black not-italic text-emerald-600 text-sm">- 회원 이OO님</div>
             </div>
           </div>
@@ -123,9 +299,9 @@
         const [activeIdx, setActiveIdx] = useState(0);
         const faqs = [
           { q: "백돌이도 참여 가능한가요?", a: "네, 실력별 맞춤 레슨이 진행되므로 초보자부터 싱글 지향 골퍼까지 모두 참여 가능합니다." },
-          { q: "준비물은 무엇인가요?", a: "개인 클럽과 골프복, 라운드 용품을 준비해 주세요. 숙소 및 조식은 포함되어 있습니다." },
-          { q: "1인 신청도 가능한가요?", a: "물론입니다. 혼자 오시는 분들도 많으시며 프로님과 동반자들이 즐겁게 동행합니다." },
-          { q: "항공권과 그린피는 별도인가요?", a: "네, 항공권과 현장 캐디피는 개별 부담입니다." }
+          { q: "준비물은 무엇인가요?", a: "개인 클럽과 골프복만 준비해 주세요. 숙박과 모든 식사는 포함되어 있습니다." },
+          { q: "1인 신청도 가능한가요?", a: "물론입니다. 혼자 오시는 분들도 많으시며 프로님과 매니저가 즐겁게 동행합니다." },
+          { q: "항공권과 그린피는 별도인가요?", a: "네, 항공권과 현장 그린피(카트/캐디 포함)는 개별 부담입니다." }
         ];
         return (
           <Section className="bg-white" id="faq">
@@ -162,26 +338,14 @@
                 <div className="text-center py-10 font-black">상담 예약 접수 완료! 곧 연락드리겠습니다.</div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="text-xs font-black text-slate-400 mb-1 block">희망 일정</label>
-                    <select className="input font-bold" name="일정">
-                      <option>3월 25-26일 (평일) - 잔여 1석</option>
-                      <option>3월 28-29일 (주말) - 2인 신청 가능</option>
-                      <option>개별 일정 조율 요청</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-xs font-black text-slate-400 mb-1 block">성함</label>
-                    <input required name="이름" placeholder="이름을 입력해 주세요" className="input" />
-                  </div>
-                  <div>
-                    <label className="text-xs font-black text-slate-400 mb-1 block">연락처</label>
-                    <input required name="연락처" type="tel" placeholder="010-0000-0000" className="input" />
-                  </div>
-                  <div>
-                    <label className="text-xs font-black text-slate-400 mb-1 block">해결하고 싶은 고민</label>
-                    <textarea name="고민" className="input h-32" placeholder="어프로치 입스, 에이밍 교정 등 구체적으로 적어주시면 좋습니다."></textarea>
-                  </div>
+                  <select className="input font-bold" name="일정">
+                    <option>3월 25-26일 (평일) - 잔여 1석</option>
+                    <option>3월 28-29일 (주말) - 2인 신청 가능</option>
+                    <option>개별 일정 조율 요청</option>
+                  </select>
+                  <input required name="이름" placeholder="성함" className="input" />
+                  <input required name="연락처" type="tel" placeholder="연락처 (010-0000-0000)" className="input" />
+                  <textarea name="고민" className="input h-32" placeholder="해결하고 싶은 고민을 구체적으로 적어주세요."></textarea>
                   <button disabled={status==="SUBMITTING"} className="btn w-full mt-4 font-black bg-slate-900 text-lg shadow-xl active:scale-95 transition-transform">
                     {status === "SUBMITTING" ? "전송 중..." : "캠프 자리 확보하기 ✨"}
                   </button>
@@ -236,3 +400,4 @@
     </script>
   </body>
 </html>
+
