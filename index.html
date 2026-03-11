@@ -627,11 +627,11 @@ class="px-10 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-[2rem] 
                     <p class="text-slate-400 font-bold text-sm">폼을 작성하시면 확인하는대로 스승님 운영팀이 연락드립니다.</p>
                 </div>
 
-                <form id="applyForm" class="space-y-5 md:space-y-7" onsubmit="handleApply(event)">
+                <form action="https://formspree.io/f/mbdakbon" method="POST" class="space-y-5 md:space-y-7">
                     <div class="space-y-2 md:space-y-3">
                         <label class="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Choice of Date</label>
                         <div class="relative">
-                            <select class="w-full px-6 py-4 md:px-10 md:py-6 bg-slate-50 border border-slate-100 rounded-[1.5rem] md:rounded-[2rem] font-black outline-none appearance-none cursor-pointer focus:ring-4 focus:ring-emerald-500/20 transition-all text-slate-800 text-sm md:text-lg shadow-inner-soft">
+                            <select name="date" class="w-full px-6 py-4 md:px-10 md:py-6 bg-slate-50 border border-slate-100 rounded-[1.5rem] md:rounded-[2rem] font-black outline-none appearance-none cursor-pointer focus:ring-4 focus:ring-emerald-500/20 transition-all text-slate-800 text-sm md:text-lg shadow-inner-soft">
                                 <option>3월 25-26일 (평일) - 마지막 1석 남음</option>
                                 <option>3월 28-29일 (주말) - 2인 신청 가능 (2인동반우선)</option>
                                 <option>별도 일정 조율 상담 희망</option>
@@ -643,16 +643,19 @@ class="px-10 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-[2rem] 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                         <div class="space-y-2 md:space-y-3">
                             <label class="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Your Name</label>
-                            <input required placeholder="성함" class="w-full px-6 py-4 md:px-10 md:py-6 bg-slate-50 border border-slate-100 rounded-[1.5rem] md:rounded-[2rem] font-bold outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all text-slate-800 placeholder-slate-300 text-sm md:text-lg shadow-inner-soft" />
+                            <input name="name" required placeholder="성함" class="w-full px-6 py-4 md:px-10 md:py-6 bg-slate-50 border border-slate-100 rounded-[1.5rem] md:rounded-[2rem] font-bold outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all text-slate-800 placeholder-slate-300 text-sm md:text-lg shadow-inner-soft" />
                         </div>
                         <div class="space-y-2 md:space-y-3">
                             <label class="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Phone Number</label>
-                            <input required type="tel" placeholder="010-0000-0000" class="w-full px-6 py-4 md:px-10 md:py-6 bg-slate-50 border border-slate-100 rounded-[1.5rem] md:rounded-[2rem] font-bold outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all text-slate-800 placeholder-slate-300 text-sm md:text-lg shadow-inner-soft" />
+                            <input name="phone" required type="tel" placeholder="010-0000-0000"
+class="w-full px-6 py-4 md:px-10 md:py-6 bg-slate-50 border border-slate-100 rounded-[1.5rem] md:rounded-[2rem] font-bold outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all text-slate-800 placeholder-slate-300 text-sm md:text-lg shadow-inner-soft" />
                         </div>
                     </div>
                     <div class="space-y-2 md:space-y-3">
                         <label class="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Golf Profile</label>
-                        <textarea placeholder="현재 구력, 평균 타수 등 고민을 적어주세요." class="w-full px-6 py-4 md:px-10 md:py-6 bg-slate-50 border border-slate-100 rounded-[1.5rem] md:rounded-[2.5rem] h-32 md:h-44 font-bold outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all text-slate-800 placeholder-slate-300 text-sm md:text-lg shadow-inner-soft"></textarea>
+                        <textarea name="golf_profile"
+placeholder="현재 구력, 평균 타수 등 고민을 적어주세요."
+class="w-full px-6 py-4 md:px-10 md:py-6 bg-slate-50 border border-slate-100 rounded-[1.5rem] md:rounded-[2rem] font-bold outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all text-slate-800 placeholder-slate-300 text-sm md:text-lg shadow-inner-soft"></textarea>
                     </div>
 
                     <div class="flex items-center gap-3 px-2">
@@ -772,12 +775,6 @@ class="px-10 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-[2rem] 
             document.body.style.overflow = 'auto';
         }
 
-        function handleApply(e) {
-            e.preventDefault();
-            const checkbox = e.target.querySelector('input[type="checkbox"]');
-            if(!checkbox.checked) { alert('개인정보 수집 및 이용에 동의해주세요.'); return; }
-            alert('예약이 접수되었습니다! 스승님 담당자가 곧 연락드립니다.');
-        }
 
         const toast = document.getElementById('live-toast');
         setInterval(() => {
@@ -803,6 +800,7 @@ class="px-10 py-5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-[2rem] 
     </script>
 </body>
 </html>
+
 
 
 
