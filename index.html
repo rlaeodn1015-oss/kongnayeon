@@ -116,24 +116,26 @@
 </head>
 <body class="ai-bg golf-char-bg">
     <header class="glass-header sticky top-0 z-[110] border-b border-slate-100">
-        <div class="px-6 h-18 flex items-center justify-between">
-            <button onclick="window.history.back()" class="group w-11 h-11 flex items-center justify-center rounded-full bg-white/50 hover:bg-slate-100 transition-all active:scale-90 shadow-inner">
-                <i class="fa-solid fa-chevron-left text-slate-900 text-sm"></i>
-            </button>
-            
-            <div class="flex flex-col items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-blue-600 rounded-full shadow-[0_0_10px_rgba(0,102,255,0.8)]"></div>
-                    <h1 class="text-sm font-black tracking-[0.12em] text-slate-950 uppercase">Seuseungnim Pass</h1>
-                </div>
-                <p class="text-[11px] text-slate-500 font-bold tracking-tight mt-0.5">프리미엄 AI 매칭 결제센터</p>
+    <div class="px-6 h-18 flex items-center justify-between">
+        <button onclick="window.history.back()" class="group w-11 h-11 flex items-center justify-center rounded-full bg-white/50 hover:bg-slate-100 transition-all active:scale-90 shadow-inner">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        
+        <div class="flex flex-col items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-blue-600 rounded-full shadow-[0_0_10px_rgba(0,102,255,0.8)]"></div>
+                <h1 class="text-sm font-black tracking-[0.12em] text-slate-950 uppercase">Seuseungnim Pass</h1>
             </div>
-
-            <div class="w-11 h-11 rounded-full flex items-center justify-center logo-floating">
-                <img src="https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/ssnim_logo_symbol.png" alt="스승님 로고" class="w-9 h-9 opacity-90">
-            </div>
+            <p class="text-[11px] text-slate-500 font-bold tracking-tight mt-0.5">프리미엄 AI 매칭 결제센터</p>
         </div>
-    </header>
+
+        <div class="w-11 h-11 rounded-full flex items-center justify-center">
+            <img src="https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/ssnim_logo_symbol.png" alt="로고" class="w-9 h-9 opacity-90 logo-floating">
+        </div>
+    </div>
+</header>
 
     <main class="pb-40">
         <section class="p-6">
@@ -174,7 +176,7 @@
                         </div>
                     </div>
                     
-                    <<div class="grid grid-cols-3 gap-3">
+                    <div class="grid grid-cols-3 gap-3">
     <div class="icon-box py-6 rounded-2xl text-center shadow-inner bg-white/60 border border-white">
         <i class="fa-solid fa-user-shield text-blue-600 text-3xl mb-2.5" style="filter: drop-shadow(0 4px 8px rgba(0,102,255,0.2));"></i>
         <p class="text-[11px] font-black text-slate-900 tracking-tighter">2중 안심결제</p>
@@ -237,6 +239,27 @@
                 </div>
         </section>
 
+        <section class="p-6 space-y-4">
+    <div class="flex items-center justify-between px-3">
+        <h4 class="text-xs font-black text-slate-400 uppercase tracking-widest">Lesson Options</h4>
+        <p class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-100">VAT 포함</p>
+    </div>
+    
+    <div id="plan-container" class="space-y-4">
+        </div>
+</section>
+
+<section class="px-6 mb-8">
+    <div class="bg-slate-50 border border-slate-100 rounded-2xl p-5 flex items-start gap-3.5 shadow-inner">
+        <i class="fa-solid fa-circle-info text-blue-500 mt-1 text-sm"></i>
+        <p class="text-[11px] text-slate-500 leading-relaxed font-medium">
+            <span class="font-black text-slate-800 uppercase tracking-wider">[스승님 가치 보존 공지]</span><br>
+            모든 레슨권 가격은 해당 <span class="font-bold text-slate-700">스승님</span>이 직접 설정한 정가를 100% 준수합니다.<br>
+            다회권 패키지에 적용된 혜택은 <span class="text-blue-600 font-bold">주식회사 스승님</span>의 마케팅 지원금으로 운영되며, <span class="font-bold text-slate-700">스승님</span>의 정산액은 삭감 없이 정가 그대로 보호됩니다.
+        </p>
+    </div>
+</section>
+
         <section class="px-6">
             <div class="futuristic-gradient rounded-[2.5rem] p-9 text-slate-950 relative overflow-hidden border border-slate-100 shadow-lg">
                 <div class="absolute -top-12 -right-12 w-36 h-36 bg-blue-50 rounded-full blur-2xl opacity-60"></div>
@@ -264,34 +287,34 @@
 
     <script>
         const getPriceOptions = (basePrice) => {
-            return {
-                '1회 체험 레슨': { 
-                    price: basePrice, 
-                    desc: '스윙 정밀 진단 및 원포인트 교정',
-                    tag: '인기'
-                },
-                '3회 집중 패키지': { 
-                    price: Math.floor((basePrice * 3 * 0.97) / 1000) * 1000,
-                    desc: '3% 할인 · 기본기 확립 코스',
-                    tag: '가성비'
-                },
-                '5회 마스터 코스': { 
-                    price: Math.floor((basePrice * 5 * 0.95) / 1000) * 1000,
-                    desc: '5% 할인 · 필드 실전 준비',
-                    tag: '추천'
-                },
-                '8회 퍼펙트 패키지': { 
-                    price: Math.floor((basePrice * 8 * 0.92) / 1000) * 1000,
-                    desc: '8% 할인 · 스윙 교정 완성',
-                    tag: '베스트'
-                },
-                '10회 VIP 멤버십': { 
-                    price: Math.floor((basePrice * 10 * 0.90) / 1000) * 1000,
-                    desc: '10% 할인 · 싱글 골퍼 프로젝트',
-                    tag: '최저가'
-                }
-            };
-        };
+    return {
+        '1회 체험 레슨': { 
+            price: basePrice, 
+            desc: '정상가 적용 · 정밀 진단 코스',
+            tag: '인기'
+        },
+        '3회 집중 패키지': { 
+            price: Math.floor((basePrice * 3 * 0.97) / 1000) * 1000,
+            desc: '플랫폼 3% 수수료 지원 · 기본기 확립',
+            tag: '가성비'
+        },
+        '5회 마스터 코스': { 
+            price: Math.floor((basePrice * 5 * 0.95) / 1000) * 1000,
+            desc: '플랫폼 5% 수수료 지원 · 실전 준비',
+            tag: '추천'
+        },
+        '8회 퍼펙트 패키지': { 
+            price: Math.floor((basePrice * 8 * 0.92) / 1000) * 1000,
+            desc: '플랫폼 8% 수수료 지원 · 스윙 완성',
+            tag: '베스트'
+        },
+        '10회 VIP 멤버십': { 
+            price: Math.floor((basePrice * 10 * 0.90) / 1000) * 1000,
+            desc: '플랫폼 10% 수수료 지원 · 싱글 프로젝트',
+            tag: '최저가'
+        }
+    };
+};
 
         const prosData = [
             { id: 1, name: "곽시랑 스승", price: 100000, rating: 5.0, review: 142, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/KakaoTalk_20260327_165459882.png", intro: "KLPGA 준회원, 드로우 구질 변화 1위 전문가. 복잡한 이론 대신 직관적인 몸의 움직임으로 슬라이스를 완벽하게 교정합니다.", specialty: "슬라이스 교정 전문", highlight: "한 달 만에 슬라이스 완쾌, 인생 스윙을 찾았습니다." },
@@ -301,7 +324,7 @@
             { id: 5, name: "홍주연 스승", price: 150000, rating: 4.9, review: 178, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/HJY.png", intro: "숏아이언 전문, 예쁜 스윙의 정석을 보여드립니다. 11년 투어 생활의 노하우로 기초부터 탄탄하게 잡아드립니다.", specialty: "기초 스윙 메커니즘", highlight: "주변에서 스윙이 너무 예쁘다는 소리를 매일 들어요." },
             { id: 6, name: "양형철 스승", price: 170000, rating: 5.0, review: 56, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/YHC.png", intro: "전 KPGA 투어 프로의 실전 라운딩 매니지먼트. 단순 스윙을 넘어 코스를 정복하는 전략적인 골프를 가르칩니다.", specialty: "필드 매니지먼트 전문", highlight: "생애 첫 싱글 기록 성공! 프로님의 전략이 신의 한 수였습니다." },
             { id: 7, name: "조동요 스승", price: 250000, rating: 4.8, review: 120, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/JDY.png", intro: "13만 유튜버의 노하우를 직접 경험하세요. 복잡한 이론을 가장 쉽게 풀어서 결과로 증명해 드립니다.", specialty: "초보 탈출 & 직관 레슨", highlight: "눈높이 교육의 끝판왕. 유튜브에서 보던 그대로 명쾌합니다." },
-            { id: 8, name: "공나연 프로", price: 180000, rating: 4.7, review: 88, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/KNY.jpg", intro: "칼날 같은 아이언 샷의 정확도를 경험해보세요. 정타 확률을 극대화하여 스코어의 일관성을 높여드립니다.", specialty: "아이언 정밀 교정", highlight: "아이언 정타 확률이 80% 이상 좋아졌습니다. 샷감이 달라요." },
+            { id: 8, name: "공나연 스승", price: 180000, rating: 4.7, review: 88, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/KNY.jpg", intro: "칼날 같은 아이언 샷의 정확도를 경험해보세요. 정타 확률을 극대화하여 스코어의 일관성을 높여드립니다.", specialty: "아이언 정밀 교정", highlight: "아이언 정타 확률이 80% 이상 좋아졌습니다. 샷감이 달라요." },
             { id: 9, name: "이원영 스승", price: 150000, rating: 4.9, review: 154, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/lwy.webp", intro: "여성 골퍼분들의 가장 큰 고민인 우드와 유틸리티를 해결해 드립니다. 부드러운 힘을 쓰는 원리를 전수합니다.", specialty: "여성 골퍼/우드 전문", highlight: "우드가 드라이버만큼 쉬워졌어요. 세컨드 샷 자신감이 최고!" },
             { id: 10, name: "유민혁 스승", price: 70000, rating: 5.0, review: 42, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/YMH.png", intro: "고질적인 슬라이스와 생크를 단 한 번의 레슨으로 해결해 드립니다. 원포인트 레슨의 정점을 경험하세요.", specialty: "구질 교정 긴급 처방", highlight: "고치지 못했던 생크를 단 30분 만에 고쳐주셨습니다." },
             { id: 11, name: "강도윤 스승", price: 150000, rating: 5.0, review: 73, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/kdy.webp", intro: "포기하지 않으면 반드시 싱글이 될 수 있습니다. 롱게임의 자신감과 완벽한 세컨드 샷 안착률을 보장합니다.", specialty: "롱게임 & 투 온 전문", highlight: "투 온에 성공할 때의 그 쾌감! 프로님 덕분에 가능했습니다." },
