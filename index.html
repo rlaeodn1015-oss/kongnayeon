@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>스승님 안전 결제센터 | 프리미엄 레슨권 결제</title>
+    <title>스승님 결제센터 | 프리미엄 레슨권 결제</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@100;400;700;900&display=swap" rel="stylesheet">
@@ -20,6 +20,81 @@
             -webkit-tap-highlight-color: transparent;
         }
         
+        .price-tag {
+    position: relative;
+    display: inline-block;
+}
+.original-price {
+    text-decoration: line-through;
+    color: #94A3B8;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.discount-badge {
+    background: linear-gradient(135deg, #FF3366 0%, #FF0040 100%);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 900;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+.benefit-text {
+    font-size: 11px;
+    color: #0066FF;
+    font-weight: 800;
+    margin-top: 4px;
+    display: flex;
+    items-center: center;
+    gap: 3px;
+}
+
+@keyframes mesh-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.ai-premium-gradient {
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+}
+
+/* 텍스트 쉐도우로 가독성 한 번 더 확보 */
+.text-sharp {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 혜택 바 - 시선을 강탈하는 고대비 디자인 */
+.benefit-accent {
+    background: #0066FF;
+    box-shadow: 0 10px 20px -5px rgba(0, 102, 255, 0.3);
+}
+
+/* 아이콘 박스 시인성 강화 */
+.icon-box {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.ai-bg {
+    background: linear-gradient(-45deg, #0F172A, #1E293B, #0F172A, #111827);
+    background-size: 400% 400%;
+    animation: mesh-gradient 20s ease infinite;
+}
+
+/* 데이터 노드 패턴 배경 (더 은은하게) */
+.node-pattern {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* 유리 질감 아이템 (가독성을 위해 배경색 추가) */
+.glass-item {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
         /* 럭셔리한 그림자 효과 */
         .soft-shadow { box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04); }
         .premium-shadow { box-shadow: 0 20px 50px -12px rgba(0, 102, 255, 0.15); }
@@ -95,51 +170,83 @@
         }
         .btn-ripple { animation: ripple 1.5s infinite; }
     </style>
-</head>
-<body class="pb-40 flex justify-center">
-
-    <div class="w-full max-w-xl bg-white min-h-screen relative shadow-2xl overflow-hidden">
-        <!-- Modern Header -->
-        <header class="glass-header sticky top-0 z-[110] border-b border-slate-50">
+<header class="glass-header sticky top-0 z-[110] border-b border-slate-200/50">
             <div class="px-6 h-16 flex items-center justify-between">
-                <button onclick="window.history.back()" class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-50 hover:bg-slate-100 transition-all">
-                    <i class="fa-solid fa-arrow-left text-slate-800"></i>
+                <button onclick="window.history.back()" class="group w-10 h-10 flex items-center justify-center rounded-full bg-slate-50/50 hover:bg-slate-100 transition-all active:scale-90">
+                    <i class="fa-solid fa-chevron-left text-slate-800 text-sm"></i>
                 </button>
-                <h1 class="text-[17px] font-black tracking-tight text-slate-900">레슨 패키지 선택</h1>
-                <button class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-50">
-                    <i class="fa-solid fa-ellipsis text-slate-400"></i>
+                
+                <div class="flex flex-col items-center">
+                    <div class="flex items-center gap-1.5">
+                        <div class="w-1.5 h-1.5 bg-blue-600 rounded-full shadow-[0_0_8px_rgba(0,102,255,0.8)]"></div>
+                        <h1 class="text-[13px] font-black tracking-[0.1em] text-slate-900 uppercase">Seuseungnim Pass</h1>
+                    </div>
+                    <p class="text-[10px] text-slate-400 font-bold tracking-tight">프리미엄 레슨 결제센터</p>
+                </div>
+
+                <button class="group w-10 h-10 flex items-center justify-center rounded-full bg-slate-50/50 hover:bg-blue-50 transition-all">
+                    <i class="fa-solid fa-headset text-slate-400 group-hover:text-blue-600 text-sm"></i>
                 </button>
             </div>
         </header>
 
         <main>
-            <!-- Trust Banner (More Sleek) -->
             <section class="p-6">
-                <div class="gradient-dark rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl">
-                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-2 mb-5">
-                            <div class="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/10 flex items-center gap-1.5">
-                                <div class="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse"></div>
-                                <span class="text-[10px] font-black uppercase tracking-widest text-blue-100">Safe Escrow System</span>
-                            </div>
-                        </div>
-                        <h2 class="text-[26px] font-black leading-[1.2] mb-3">
-                            검증된 프로의 레슨권,<br><span class="text-blue-400">가장 안전한 직접 결제</span>
-                        </h2>
-                        <p class="text-slate-400 text-xs font-medium mb-8 leading-relaxed">법무법인 로투스가 모든 거래를 중재하며,<br>불만족 시 100% 환불을 보장합니다.</p>
-                        
-                        <div class="flex gap-4">
-                            <div class="flex -space-x-3">
-                                <div class="w-8 h-8 rounded-full border-2 border-slate-800 bg-slate-700 flex items-center justify-center text-[10px] font-bold">카드</div>
-                                <div class="w-8 h-8 rounded-full border-2 border-slate-800 bg-slate-700 flex items-center justify-center text-[10px] font-bold">계좌</div>
-                                <div class="w-8 h-8 rounded-full border-2 border-slate-800 bg-slate-700 flex items-center justify-center text-[10px] font-bold">페이</div>
-                            </div>
-                            <p class="text-[11px] text-slate-500 flex items-center">모든 결제 수단 지원</p>
-                        </div>
+    <div class="ai-premium-gradient rounded-[2.5rem] p-9 text-white relative overflow-hidden shadow-2xl">
+        
+        <div class="absolute top-0 right-0 w-40 h-40 bg-blue-600 opacity-20 blur-[80px]"></div>
+
+        <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-6">
+                <span class="px-3 py-1 bg-blue-500 text-white text-[10px] font-black rounded-lg tracking-widest uppercase">
+                    AI Match Success
+                </span>
+                <span class="text-slate-400 text-[10px] font-bold tracking-widest uppercase">Verified by Data</span>
+            </div>
+
+            <h2 class="text-[32px] font-black leading-[1.1] mb-4 tracking-tighter text-white">
+    데이터가 증명하는<br>
+    <span id="display-name" class="text-blue-400 font-black italic">고객</span><span class="text-blue-400 font-black">님 맞춤 스승님</span>
+</h2>
+            
+            <p class="text-slate-300 text-[15px] font-medium mb-10 leading-snug opacity-90">
+                124개 스윙 포인트 정밀 분석 완료.<br>
+                실력 향상이 보증된 최적의 매칭입니다.
+            </p>
+            
+            <div class="benefit-accent rounded-3xl p-6 mb-10 relative overflow-hidden">
+                <i class="fa-solid fa-gift absolute -right-2 -bottom-2 text-white/10 text-6xl rotate-12"></i>
+                
+                <div class="relative z-10 flex items-center gap-4">
+                    <div class="min-w-[48px] h-[48px] bg-white/20 rounded-2xl flex items-center justify-center">
+                        <i class="fa-solid fa-plus text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-blue-100 text-[11px] font-black uppercase tracking-widest mb-1">Exclusive Pass</p>
+                        <p class="text-[17px] font-black text-white leading-tight">
+                            지금 결제 시 <span class="underline decoration-white decoration-2 underline-offset-4">레슨 +1회 추가</span>
+                        </p>
                     </div>
                 </div>
-            </section>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-3">
+                <div class="icon-box py-5 rounded-2xl text-center">
+                    <i class="fa-solid fa-shield-check text-blue-400 text-2xl mb-2"></i>
+                    <p class="text-[11px] font-black text-white">안심결제</p>
+                </div>
+                <div class="icon-box py-5 rounded-2xl text-center border-blue-500/40 bg-blue-500/10">
+                    <i class="fa-solid fa-microchip text-blue-400 text-2xl mb-2"></i>
+                    <p class="text-[11px] font-black text-white">데이터검증</p>
+                </div>
+                <div class="icon-box py-5 rounded-2xl text-center">
+                    <i class="fa-solid fa-rotate-left text-blue-400 text-2xl mb-2"></i>
+                    <p class="text-[11px] font-black text-white">환불보장</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
             <!-- Interactive Pro Tabs (Horizontal Scroll Fix) -->
             <section class="sticky top-16 z-[100] bg-white/95 backdrop-blur-md border-b border-slate-100">
@@ -332,23 +439,43 @@
         }
 
         function renderPlans(basePrice) {
-            const options = getPriceOptions(basePrice);
-            const container = document.getElementById('plan-container');
-            container.innerHTML = Object.entries(options).map(([title, data], index) => `
-                <div onclick="selectPlan('${title}', ${data.price})" id="plan-${title.replace(/ /g, '')}" class="plan-card bg-white p-6 rounded-[2rem] flex justify-between items-center soft-shadow animate-fade" style="animation-delay: ${index * 0.05}s">
-                    <div class="text-left">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-[9px] font-black bg-blue-50 text-blue-600 px-2 py-0.5 rounded uppercase tracking-widest border border-blue-100">${data.tag}</span>
-                        </div>
-                        <h4 class="text-[17px] font-black text-slate-800 tracking-tight">${title}</h4>
-                        <p class="text-[11px] text-slate-400 font-bold mt-1">${data.desc}</p>
+    const options = getPriceOptions(basePrice);
+    const container = document.getElementById('plan-container');
+    
+    container.innerHTML = Object.entries(options).map(([title, data], index) => {
+        // 정가 계산 (할인 전 금액)
+        const count = parseInt(title.match(/\d+/)) || 1;
+        const originalPrice = basePrice * count;
+        const discountRate = Math.round(((originalPrice - data.price) / originalPrice) * 100);
+        
+        return `
+            <div onclick="selectPlan('${title}', ${data.price})" id="plan-${title.replace(/ /g, '')}" 
+                 class="plan-card bg-white p-6 rounded-[2rem] flex justify-between items-center soft-shadow animate-fade relative overflow-hidden" 
+                 style="animation-delay: ${index * 0.05}s">
+                
+                <div class="text-left z-10">
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[9px] font-black bg-blue-50 text-blue-600 px-2 py-0.5 rounded uppercase tracking-widest border border-blue-100">${data.tag}</span>
+                        ${discountRate > 0 ? `<span class="discount-badge">${discountRate}% OFF</span>` : ''}
                     </div>
-                    <div class="text-right">
-                        <p class="text-xl font-black text-slate-900 tracking-tighter">${data.price.toLocaleString()}원</p>
+                    <h4 class="text-[17px] font-black text-slate-800 tracking-tight">${title}</h4>
+                    <p class="text-[11px] text-slate-400 font-bold mt-1">${data.desc}</p>
+                    
+                    <div class="benefit-text">
+                        <i class="fa-solid fa-gift"></i>
+                        <span>스승님 단독: +1회 추가 증정 완료</span>
                     </div>
                 </div>
-            `).join('');
-        }
+
+                <div class="text-right z-10">
+                    ${discountRate > 0 ? `<p class="original-price">${originalPrice.toLocaleString()}원</p>` : ''}
+                    <p class="text-xl font-black text-slate-900 tracking-tighter">${data.price.toLocaleString()}원</p>
+                    <p class="text-[10px] font-bold text-emerald-500 mt-1">회당 ${(Math.floor(data.price / (count + 1) / 100) * 100).toLocaleString()}원</p>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
 
         function renderReview(highlight) {
             document.getElementById('review-container').innerHTML = `
@@ -383,6 +510,17 @@
             const payUrl = `https://rlaeodn1015-oss.github.io/ssnim-request-landing/pay.html?price=${selectedPlan.price}&name=${encodeURIComponent(pro.name + ' ' + selectedPlan.title)}&requestId=${requestId}`;
             location.href = payUrl;
         }
+        
+function getUserNameFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let name = urlParams.get('name');
+    
+    // 이름이 URL에 없다면 기본값으로 '고객'을 사용
+    if (!name || name.trim() === "") {
+        name = "고객";
+    }
+    return name;
+}
 
         window.onload = () => {
             initTabs();
