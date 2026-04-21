@@ -287,34 +287,14 @@
 
     <script>
         const getPriceOptions = (basePrice) => {
-    return {
-        '1회 체험 레슨': { 
-            price: basePrice, 
-            desc: '정상가 적용 · 정밀 진단 코스',
-            tag: '인기'
-        },
-        '3회 집중 패키지': { 
-            price: Math.floor((basePrice * 3 * 0.97) / 1000) * 1000,
-            desc: '플랫폼 3% 수수료 지원 · 기본기 확립',
-            tag: '가성비'
-        },
-        '5회 마스터 코스': { 
-            price: Math.floor((basePrice * 5 * 0.95) / 1000) * 1000,
-            desc: '플랫폼 5% 수수료 지원 · 실전 준비',
-            tag: '추천'
-        },
-        '8회 퍼펙트 패키지': { 
-            price: Math.floor((basePrice * 8 * 0.92) / 1000) * 1000,
-            desc: '플랫폼 8% 수수료 지원 · 스윙 완성',
-            tag: '베스트'
-        },
-        '10회 VIP 멤버십': { 
-            price: Math.floor((basePrice * 10 * 0.90) / 1000) * 1000,
-            desc: '플랫폼 10% 수수료 지원 · 싱글 프로젝트',
-            tag: '최저가'
-        }
-    };
-};
+            return {
+                '1회 체험 레슨': { price: basePrice, desc: '정상가 적용 · 정밀 진단 코스', tag: '인기' },
+                '3회 집중 패키지': { price: Math.floor((basePrice * 3 * 0.97) / 1000) * 1000, desc: '기본기 확립 코스', tag: '가성비' },
+                '5회 마스터 코스': { price: Math.floor((basePrice * 5 * 0.95) / 1000) * 1000, desc: '필드 실전 준비', tag: '추천' },
+                '8회 퍼펙트 패키지': { price: Math.floor((basePrice * 8 * 0.92) / 1000) * 1000, desc: '스윙 완성 패키지', tag: '베스트' },
+                '10회 VIP 멤버십': { price: Math.floor((basePrice * 10 * 0.90) / 1000) * 1000, desc: '싱글 프로젝트', tag: '최저가' }
+            };
+        };
 
         const prosData = [
             { id: 1, name: "곽시랑 스승", price: 100000, rating: 5.0, review: 142, img: "https://rlaeodn1015-oss.github.io/ssnim-request-landing/images/KakaoTalk_20260327_165459882.png", intro: "KLPGA 준회원, 드로우 구질 변화 1위 전문가. 복잡한 이론 대신 직관적인 몸의 움직임으로 슬라이스를 완벽하게 교정합니다.", specialty: "슬라이스 교정 전문", highlight: "한 달 만에 슬라이스 완쾌, 인생 스윙을 찾았습니다." },
@@ -347,24 +327,23 @@
         function selectPro(id, element) {
             currentId = id;
             selectedPlan = null;
-            
-            // 탭 중앙 정렬 애니메이션
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }
+            if (element) element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+            const pro = prosData.find(p => p.id === id);
+            if (!pro) return;
 
             // UI 초기화
             const priceDisplay = document.getElementById('total-price-display');
-            priceDisplay.innerText = '0원';
-            priceDisplay.classList.remove('text-blue-600', 'scale-105');
+priceDisplay.innerText = '0원';
+priceDisplay.classList.remove('text-blue-600', 'scale-105'); // 이 줄이 있어야 UI가 깨끗하게 리셋됩니다.
 
             const payBtn = document.getElementById('pay-button');
-            payBtn.innerText = "상품을 선택해주세요";
-            payBtn.className = "flex-[1.8] bg-slate-100 text-slate-400 py-5 rounded-2xl font-black text-lg transition-all cursor-not-allowed shadow-inner tracking-tight";
-            payBtn.classList.remove('btn-ripple', 'gradient-blue', 'text-white', 'premium-shadow');
+payBtn.innerText = "상품을 선택해주세요";
+payBtn.className = "flex-[1.8] bg-slate-100 text-slate-400 py-5 rounded-2xl font-black text-lg transition-all cursor-not-allowed shadow-inner tracking-tight";
+payBtn.classList.remove('btn-ripple', 'gradient-blue', 'text-white', 'premium-shadow');
 
-            document.querySelectorAll('.pro-tab').forEach(t => t.classList.remove('tab-active'));
-            document.getElementById('tab-' + id).classList.add('tab-active');
+           document.querySelectorAll('.pro-tab').forEach(t => t.classList.remove('tab-active'));
+document.getElementById('tab-' + id).classList.add('tab-active');
 
             // 프로필 섹션 리로딩 효과
             const profileContainer = document.getElementById('pro-profile-container');
@@ -396,12 +375,12 @@
                 const count = parseInt(title.match(/\d+/)) || 1;
                 const originalPrice = basePrice * count;
                 const discountRate = Math.round(((originalPrice - data.price) / originalPrice) * 100);
+                const hasExtraBenefit = count >= 8;
                 
                 return `
                     <div onclick="selectPlan('${title}', ${data.price})" id="plan-${title.replace(/ /g, '')}" 
                          class="plan-card p-6 rounded-3xl flex justify-between items-center soft-shadow animate-fade relative overflow-hidden" 
                          style="animation-delay: ${index * 0.06}s">
-                        
                         <div class="text-left z-10">
                             <div class="flex items-center gap-2.5 mb-2">
                                 <span class="text-[10px] font-black bg-blue-50 text-blue-600 px-2.5 py-1 rounded-md uppercase tracking-wider border border-blue-100 shadow-inner">${data.tag}</span>
@@ -409,17 +388,18 @@
                             </div>
                             <h4 class="text-lg font-black text-slate-900 tracking-tight">${title}</h4>
                             <p class="text-[12px] text-slate-500 font-bold mt-1.5 opacity-90">${data.desc}</p>
-                            
+                            ${hasExtraBenefit ? `
                             <div class="benefit-text">
-                                <i class="fa-solid fa-gift text-blue-400"></i>
-                                <span>스승님 단독: +1회 추가 증정 완료</span>
-                            </div>
+                                <i class="fa-solid fa-circle-plus text-blue-600"></i>
+                                <span class="font-black text-[13px]">추가 1회 제공</span>
+                            </div>` : '<div class="h-[25px]"></div>'}
                         </div>
-
                         <div class="text-right z-10 flex flex-col items-end">
                             ${discountRate > 0 ? `<p class="original-price mb-1">${originalPrice.toLocaleString()}원</p>` : ''}
                             <p class="text-2xl font-black text-slate-950 tracking-tighter">${data.price.toLocaleString()}원</p>
-                            <p class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded mt-2 border border-emerald-100 shadow-inner">회당 ${(Math.floor(data.price / (count + 1) / 100) * 100).toLocaleString()}원</p>
+                            <p class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded mt-2 border border-emerald-100 shadow-inner">
+                                회당 ${(Math.floor(data.price / (hasExtraBenefit ? count + 1 : count) / 100) * 100).toLocaleString()}원
+                            </p>
                         </div>
                     </div>
                 `;
@@ -454,25 +434,29 @@
             payBtn.className = "flex-[1.8] gradient-blue text-white py-5 rounded-2xl font-black text-lg premium-shadow active:scale-95 transition-all btn-ripple tracking-tight";
         }
 
+        function goPay() {
+            if (!selectedPlan) return;
+            
+            const pro = prosData.find(p => p.id === currentId);
+            const userName = getUserNameFromUrl();
+            const price = selectedPlan.price;
+            const orderName = `[스승님] ${pro.name} - ${selectedPlan.title}`;
+            const requestId = `SNIM_${currentId}_${selectedPlan.title.replace(/ /g, '_')}_${Date.now()}`;
+
+            // pay.html로 필요한 모든 데이터를 붙여서 이동
+            const payUrl = `pay.html?price=${price}&name=${encodeURIComponent(orderName)}&requestId=${requestId}&userName=${encodeURIComponent(userName)}`;
+            location.href = payUrl;
+        }
+        
         function getUserNameFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
-            let name = urlParams.get('name');
-            return name ? decodeURIComponent(name) : "고객";
+            return urlParams.get('name') || "고객";
         }
-
-        function goPay() {
-    if (!selectedPlan) return;
-    
-    const pro = prosData.find(p => p.id === currentId);
-    const userName = getUserNameFromUrl();
-    const price = selectedPlan.price;
-    const orderName = `[스승님] ${pro.name} - ${selectedPlan.title}`;
-    const requestId = `SNIM_${currentId}_${selectedPlan.title.replace(/ /g, '_')}_${Date.now()}`;
-
-    // pay.html로 데이터 전송하며 이동
-    const payUrl = `pay.html?price=${price}&name=${encodeURIComponent(orderName)}&requestId=${requestId}&userName=${encodeURIComponent(userName)}`;
-    location.href = payUrl;
-}
+        window.onload = () => {
+            document.getElementById('display-name').innerText = getUserNameFromUrl();
+            initTabs();
+            selectPro(1, document.getElementById('tab-1'));
+        };
     </script>
 </body>
 </html>
