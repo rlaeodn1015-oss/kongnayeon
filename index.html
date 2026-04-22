@@ -377,12 +377,12 @@
         }
 
         function selectPro(id, element) {
-            currentId = id;
-            selectedPlan = null;
-            if (element) element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    currentId = id;
+    selectedPlan = null;
+    if (element) element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 
-            const pro = prosData.find(p => p.id === id);
-            if (!pro) return;
+    const pro = prosData.find(p => p.id === id);
+    if (!pro) return;
 
             // UI 초기화
             const priceDisplay = document.getElementById('total-price-display');
@@ -398,26 +398,42 @@ payBtn.classList.remove('btn-ripple', 'gradient-blue', 'text-white', 'premium-sh
 document.getElementById('tab-' + id).classList.add('tab-active');
 
             // 프로필 섹션 리로딩 효과
-            const profileContainer = document.getElementById('pro-profile-container');
-            profileContainer.style.opacity = '0';
-            profileContainer.style.transform = 'translateY(15px)';
-            
-            setTimeout(() => {
-                const pro = prosData.find(p => p.id === id);
-                document.getElementById('pro-img').src = pro.img;
-                document.getElementById('pro-name').innerText = pro.name;
-                document.getElementById('pro-intro').innerText = pro.intro;
-                document.getElementById('pro-specialty').innerText = pro.specialty;
-                document.getElementById('pro-rating').innerText = pro.rating.toFixed(1);
-                document.getElementById('pro-students').innerText = pro.review + "명 수강";
+const profileContainer = document.getElementById('pro-profile-container');
+profileContainer.style.opacity = '0';
+profileContainer.style.transform = 'translateY(15px)';
 
-                renderPlans(pro.price);
-                renderReview(pro.highlight);
+setTimeout(() => {
+    const pro = prosData.find(p => p.id === id);
+    
+    // [추가] 이미지와 컨테이너 요소 가져오기
+    const proImg = document.getElementById('pro-img');
+    const imgContainer = proImg.parentElement;
 
-                profileContainer.style.opacity = '1';
-                profileContainer.style.transform = 'translateY(0)';
-            }, 180);
-        }
+    proImg.src = pro.img;
+
+    // [핵심 로직] 조이현(2번), 유민혁(10번) 프로만 특별 관리
+    if (pro.id === 2 || pro.id === 10) {
+        proImg.style.objectFit = 'contain';     // 사진 전체가 다 나오게 (얼굴 안잘림)
+        proImg.style.objectPosition = 'center';  // 중앙 정렬
+        imgContainer.style.backgroundColor = '#F8FAFC'; // 빈 공간은 배경색과 통일
+    } else {
+        proImg.style.objectFit = 'cover';       // 나머지 프로는 꽉 차게
+        proImg.style.objectPosition = 'top';     // 기본적으로 얼굴 위주(상단) 정렬
+        imgContainer.style.backgroundColor = 'transparent';
+    }
+
+    document.getElementById('pro-name').innerText = pro.name;
+    document.getElementById('pro-intro').innerText = pro.intro;
+    document.getElementById('pro-specialty').innerText = pro.specialty;
+    document.getElementById('pro-rating').innerText = pro.rating.toFixed(1);
+    document.getElementById('pro-students').innerText = pro.review + "명 수강";
+
+    renderPlans(pro.price);
+    renderReview(pro.highlight);
+
+    profileContainer.style.opacity = '1';
+    profileContainer.style.transform = 'translateY(0)';
+}, 180);
 
         function renderPlans(basePrice) {
             const options = getPriceOptions(basePrice);
