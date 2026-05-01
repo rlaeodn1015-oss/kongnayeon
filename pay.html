@@ -26,13 +26,19 @@
         async function startPayment() {
             const params = new URLSearchParams(window.location.search);
             
+            // 1. 데이터 수집 (index에서 넘어온 값들)
             const price = parseInt(params.get('price')) || 0;
             const userName = params.get('userName') || "고객";
-            const userPhone = params.get('userPhone') || "-";
-            const proName = params.get('proName') || "-";
-            const proPhone = params.get('proPhone') || "-";
-            const lessonCount = params.get('lessonCount') || "회차미정";
+            const orderName = params.get('name') || "레슨권 결제"; 
             const requestId = params.get('requestId') || `TKT_${Date.now()}`;
+            
+            // 2. 앱스 스크립트 변수명과 일치시키기 위한 파싱
+            // orderName 예시: "[스승님] 곽시랑 스승 - 3회 집중 패키지"
+            const nameParts = orderName.split(' - ');
+            const proName = nameParts[0].replace('[스승님] ', ''); 
+            const lessonCount = nameParts[1] || "회차미정";
+            const userPhone = "-"; // 필요시 index에서 추가로 넘겨받아야 함
+            const proPhone = "-";  // 필요시 index에서 추가로 넘겨받아야 함
 
             const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzfqHWO3J48sE3XbfOvWgXUkULhIh3MdETumpw9GbFNeCr-R3F392bH7Sj6ZVcs1VZYhw/exec";
 
@@ -41,7 +47,7 @@
                 return;
             }
 
-            // [1단계] 결제창 띄우기 전, 시트에 '결제 대기' 상태로 한 줄 추가
+            // [1단계] 시트 '결제 대기' 기록 (앱스 스크립트 변수명에 정확히 맞춤)
             try {
                 await fetch(GOOGLE_SHEET_URL, {
                     method: "POST",
@@ -54,46 +60,44 @@
                         lessonCount: lessonCount,
                         proPhone: proPhone,
                         price: price,
-                        status: "결제 대기", // 초기 상태
+                        status: "결제 대기",
                         requestId: requestId
                     })
                 });
-            } catch (e) {
-                console.error("초기 데이터 기록 실패:", e);
-            }
+            } catch (e) { console.error("데이터 기록 실패:", e); }
 
             // [2단계] 부트페이 결제창 호출
             try {
                 const response = await Bootpay.requestPayment({
                     "application_id": "67ecd171d9af4e5c6d21736b",
                     "price": price,
-                    "order_name": `[추가레슨권] ${proName} - ${lessonCount}`,
+                    "order_name": orderName,
                     "order_id": requestId,
                     "pg": "nicepay",
                     "method": "card",
-                    "user": { "username": userName, "phone": userPhone },
+                    "user": { "username": userName },
                     "extra": { "open_type": "iframe" }
                 });
 
                 if (response.event === 'done') {
-                    document.getElementById('msg').innerText = "결제 완료! 데이터를 업데이트 중입니다...";
+                    document.getElementById('msg').innerText = "결제 성공! 상태 업데이트 중...";
 
-                    // [3단계] 결제 성공 시, requestId를 찾아 '미지급(결제완료)'로 업데이트
+                    // [3단계] 시트 상태 '결제완료'로 업데이트
                     await fetch(GOOGLE_SHEET_URL, {
                         method: "POST",
                         mode: "no-cors",
                         body: JSON.stringify({
                             action: "updateTicketStatus",
                             requestId: requestId,
-                            status: "미지급(결제완료)",
-                            payMethod: response.data.method_origin_name || "카드"
+                            status: "미지급(결제완료)"
                         })
                     });
                     
-                    location.href = "success.html";
+                    // 성공 페이지 이동 (금액, ID, retry 포함)
+                    location.href = `success.html?price=${price}&requestId=${requestId}&retry=1`;
                 }
             } catch (e) {
-                alert("결제 진행 중 오류가 발생했습니다.");
+                alert("결제 오류 발생: " + e.message);
                 window.history.back();
             }
         }
