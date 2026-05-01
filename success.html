@@ -64,18 +64,17 @@
         // ※ 주의: 어제 생성한 구글 앱스 스크립트 실행 URL을 아래에 넣으세요.
         const GAS_URL = "https://script.google.com/macros/s/AKfycbzfqHWO3J48sE3XbfOvWgXUkULhIh3MdETumpw9GbFNeCr-R3F392bH7Sj6ZVcs1VZYhw/exec";
 
-        if (requestId && params.get('retry') === '1') {
-            fetch(GAS_URL, {
-                method: "POST",
-                mode: "no-cors",
-                body: JSON.stringify({
-                    action: "updatePayment",
-                    requestId: requestId,
-                    paymentStatus: "결제 완료",
-                    paidAmount: price
-                })
-            });
-        }
+       if (requestId && params.get('retry') === '1') {
+    fetch(GAS_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({
+            action: "updateTicketStatus", // 1. 액션명 통일 (pay.html과 일치)
+            requestId: requestId,        // 2. 고유 키값
+            status: "미지급(결제완료)"    // 3. 앱스 스크립트 변수명(status)과 상태값 통일
+        })
+    });
+}
     };
 
     // 3. 창 닫기 로직 (카톡 인앱 브라우저 대응)
