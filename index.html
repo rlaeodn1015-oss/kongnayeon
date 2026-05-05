@@ -35,6 +35,51 @@
         .per-lesson-badge { font-size: 12px; font-weight: 900; color: #059669; background: #ecfdf5; padding: 4px 8px; border-radius: 6px; border: 1px solid #d1fae5; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade { animation: fadeIn 0.5s ease forwards; }
+        .pro-card-tab {
+    flex-shrink: 0;
+    width: 105px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    cursor: pointer;
+}
+
+.pro-thumb {
+    width: 100%;
+    height: 130px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 2px solid transparent;
+    background: #f1f5f9;
+    filter: grayscale(100%); /* 선택 안 됐을 땐 흑백 처리 */
+    transition: all 0.3s ease;
+}
+
+.pro-card-tab.tab-active .pro-thumb {
+    border-color: var(--brand-blue);
+    filter: grayscale(0%); /* 선택되면 컬러로 변경 */
+    transform: translateY(-5px); /* 살짝 위로 올라오는 효과 */
+    box-shadow: 0 10px 25px -5px rgba(0, 102, 255, 0.3);
+}
+
+.pro-card-name { 
+    font-size: 13px; 
+    font-weight: 800; 
+    color: #64748B; 
+    text-align: center; 
+}
+
+.pro-card-tab.tab-active .pro-card-name { 
+    color: var(--brand-blue); 
+}
+
+.pro-card-price { 
+    font-size: 10px; 
+    font-weight: 700; 
+    color: #94A3B8; 
+    text-align: center; 
+    margin-top: 2px; 
+}
     </style>
 </head>
 <body class="ai-bg golf-char-bg">
@@ -90,10 +135,20 @@
             </div>
         </section>
 
-        <!-- 프로 선택 탭 -->
-        <section class="sticky top-18 z-[100] bg-white/95 backdrop-blur-md border-b border-slate-100">
-            <div id="tab-scroll" class="flex overflow-x-auto no-scrollbar px-6 gap-5 scroll-smooth"></div>
-        </section>
+        <!-- 프로 선택 섹션 (강조된 가로 스크롤 카드) -->
+<section class="py-8 bg-white/50 border-b border-slate-100">
+    <div class="px-6 mb-4 flex justify-between items-end">
+        <div>
+            <h4 class="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-1">Expert Selection</h4>
+            <p class="text-lg font-black text-slate-900 tracking-tighter">나에게 맞는 스승님 선택</p>
+        </div>
+        <p class="text-[11px] text-slate-400 font-bold">좌우로 밀어서 선택 <i class="fa-solid fa-arrow-right ml-1"></i></p>
+    </div>
+    
+    <div id="tab-scroll" class="flex overflow-x-auto no-scrollbar px-6 gap-4 scroll-smooth pb-4">
+        <!-- JS에서 카드가 생성됩니다 -->
+    </div>
+</section>
 
         <!-- 프로필 섹션 (대표님 원본 유지) -->
         <section id="pro-profile-container" class="p-6 animate-fade">
@@ -266,6 +321,18 @@
 
             renderPlans(pro.price); renderReview(pro.highlight);
         }
+
+        function initTabs() {
+    document.getElementById('tab-scroll').innerHTML = prosData.map(pro => `
+        <div onclick="selectPro(${pro.id}, this)" id="tab-${pro.id}" class="pro-card-tab ${pro.id === 1 ? 'tab-active' : ''}">
+            <div class="pro-thumb">
+                <img src="${pro.img}" class="w-full h-full object-cover" alt="${pro.name}">
+            </div>
+            <p class="pro-card-name">${pro.name.split(' ')[0]}</p>
+            <p class="pro-card-price">${pro.price.toLocaleString()}원~</p>
+        </div>
+    `).join('');
+}
 
         function renderPlans(basePrice) {
             const options = getPriceOptions(basePrice);
